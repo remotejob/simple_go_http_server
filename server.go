@@ -8,7 +8,13 @@ import (
 
 func init() {
 
-	// exist := check_logfile_existense("log.csv")
+	exist := check_logfile_existense("log.csv")
+
+	if exist {
+
+		log.Println("log file exist")
+
+	}
 
 }
 
