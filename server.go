@@ -4,22 +4,54 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+
+	"time"
+
+	"github.com/remotejob/simple_go_http_server/check_logfile_existense"
+	"github.com/remotejob/simple_go_http_server/domains"
+	"github.com/remotejob/simple_go_http_server/entryLogsHandler"
+	"github.com/remotejob/simple_go_http_server/recordHit"
 )
+
+const logfile = "logs.csv"
+const timeMin int = 30
+
+var counterToClenUpLogfile int
+var newLogsEntry *entryLogsHandler.EntryLog
+
+var deltaTime time.Duration
 
 func init() {
 
-	exist := check_logfile_existense("log.csv")
+	deltaTime = time.Duration(time.Minute * time.Duration(timeMin))
 
-	if exist {
+	newLogsEntry = entryLogsHandler.NewEntryLog()
 
-		log.Println("log file exist")
+	exist := check_logfile_existense.Check(logfile)
 
+	if !exist {
+
+		log.Println("log file not exist")
+		file, err := os.Create(logfile)
+		if err != nil {
+
+			log.Fatalln(err.Error())
+		}
+		file.Close()
+
+	} else {
+
+		newLogsEntry.AddLastRecords(logfile, deltaTime, true)
 	}
 
 }
 
 func middleware(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+		now := time.Now()
+		log := domains.Log{now, req.UserAgent()}
+		go recordHit.Record(logfile, log)
 
 		h.ServeHTTP(rw, req)
 	})
@@ -27,7 +59,35 @@ func middleware(h http.Handler) http.Handler {
 
 func loghandler(rw http.ResponseWriter, req *http.Request) {
 
-	fmt.Fprintf(rw, "Hello request")
+	newLogsEntry.AddNewHit(req.UserAgent())
+
+	log.Println("Click ", len(newLogsEntry.EntryLog))
+
+	for i, logentry := range newLogsEntry.EntryLog {
+
+		delta := time.Since(logentry.Date)
+
+		if deltaTime.Seconds() > delta.Seconds() {
+			fmt.Fprintln(rw, logentry.Date.Format(time.RFC3339), logentry.Log)
+
+		} else {
+
+			newLogsEntry.DeleteExtraRecords(i)
+
+			counterToClenUpLogfile++
+
+			log.Println("counterToClenUpLogfile", counterToClenUpLogfile)
+
+			if counterToClenUpLogfile > 10 {
+				// newLogsEntry.CleanExtraRecords(deltaTime)
+				newLogsEntry.AddLastRecords(logfile, deltaTime, false)
+				counterToClenUpLogfile = 0
+			}
+
+		}
+
+	}
+
 }
 
 func main() {

@@ -2,6 +2,7 @@
 *.o
 *.a
 *.so
+logs.csv
 
 # Folders
 _obj

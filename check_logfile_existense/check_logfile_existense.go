@@ -1,12 +1,16 @@
 package check_logfile_existense
 
+import "os"
+
 //Check simple check if logfile exist
 func Check(logfile string) bool {
 
-	var exist bool
+	if _, err := os.Stat(logfile); os.IsNotExist(err) {
 
-	exist = false
+		return false
 
-	return exist
+	}
+
+	return true
 
 }
