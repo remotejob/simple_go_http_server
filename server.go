@@ -80,7 +80,7 @@ func loghandler(rw http.ResponseWriter, req *http.Request) {
 
 			if counterToClenUpLogfile > 10 {
 				// newLogsEntry.CleanExtraRecords(deltaTime)
-				newLogsEntry.AddLastRecords(logfile, deltaTime, false)
+				go newLogsEntry.AddLastRecords(logfile, deltaTime, false)
 				counterToClenUpLogfile = 0
 			}
 

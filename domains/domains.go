@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-//Log simple struct
+//Log record simple struct
 type Log struct {
 	Date time.Time
 	Log  string

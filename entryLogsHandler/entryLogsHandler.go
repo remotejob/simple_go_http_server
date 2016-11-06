@@ -18,11 +18,12 @@ func NewEntryLog() *EntryLog {
 	return &EntryLog{[]domains.Log{}}
 }
 
-func checkError(message string, err error) {
-	if err != nil {
-		log.Fatal(message, err)
-	}
-}
+// func checkError(message string, err error) {
+// 	if err != nil {
+// 		log.Fatal(message, err)
+// 	}
+// }
+
 func (logs *EntryLog) AddLastRecords(file string, deltaTime time.Duration, init bool) {
 
 	csvfile, err := os.Open(file)
@@ -92,18 +93,9 @@ func (logs *EntryLog) AddLastRecords(file string, deltaTime time.Duration, init 
 
 	wr.WriteAll(tmpArrStr)
 
-	// for _, record := range tmpArrStr {
-
-	// 	log.Println(record)
-
-	// 	wr.Write(record)
-	// 	wr.Flush()
-
-	// }
-
-	// defer w.Flush()
-
 }
+
+// AddNewHit add last click hit in pointer
 func (logs *EntryLog) AddNewHit(logstr string) {
 
 	logrecord := domains.Log{time.Now(), logstr}

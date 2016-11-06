@@ -9,7 +9,7 @@ import (
 	"github.com/remotejob/simple_go_http_server/domains"
 )
 
-//Record Log in CVS format
+//Record  Write last Log record in CVS file
 func Record(file string, log domains.Log) {
 
 	f, err := os.OpenFile(file, os.O_WRONLY|os.O_APPEND, 0644)
