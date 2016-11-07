@@ -1,4 +1,4 @@
-/*
+/*Package check_logfile_existense
 simple check if logfile exist
 */
 package check_logfile_existense

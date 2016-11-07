@@ -1,4 +1,4 @@
-/*
+/*Package recordHit
 used for goroutine, write in background
 last hit record
 */
