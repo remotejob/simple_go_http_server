@@ -1,4 +1,4 @@
-/*
+/*Package domains
 keep struc in one place
 */
 package domains

@@ -1,6 +1,6 @@
-/*
-used to keep records slice of struc in pointer
-it ad new records and delete not used records in pointer
+/*Package entryLogsHandler
+used to keep records slice of struc in pointer,
+add new records and delete not used records in pointer
 keep clean Database (.csv file but it can be other backend for example redis etc..)
 */
 package entryLogsHandler
