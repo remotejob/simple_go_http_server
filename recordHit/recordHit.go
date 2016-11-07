@@ -1,3 +1,7 @@
+/*
+used for goroutine, write in background
+last hit record
+*/
 package recordHit
 
 import (

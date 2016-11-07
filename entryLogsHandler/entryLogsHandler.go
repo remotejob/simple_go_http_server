@@ -23,7 +23,7 @@ func NewEntryLog() *EntryLog {
 	return &EntryLog{[]domains.Log{}}
 }
 
-//AddLastRecords used mostly for control database (in our case simple .csv file)
+//AddLastRecords used mostly for control database (in our case simple .csv file),
 //it keep only needed records.
 //1. It used at spart up (init func) init paramaters must be set TRUE
 //2. Used as goroutines periodicly cleapUp Database init paramaters must be set FALSE

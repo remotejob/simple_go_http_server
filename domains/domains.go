@@ -1,3 +1,6 @@
+/*
+keep struc in one place
+*/
 package domains
 
 import (
