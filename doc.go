@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 /*
-	Package weathermap_go simple web site
+	Package simple_go_http_server
 
 	Live DEMO http://104.155.23.78:8080
 
@@ -12,7 +12,7 @@
 
 	Use
 
-	The points --> smallest Docker image, test web performatce (Angular 2):
+	as utility for logs view:
 
 	General:
 
@@ -21,11 +21,7 @@
 		Amazon EC2 Container Service
 		Google Container Engine
 		Azure Container Service etc..
-
-	Geo Location:
-		get coordinate by
-		free GeoLite2-City DB
-		https://dev.maxmind.com/geoip/geoip2/geolite2/
+		as well can be used as stand alone application
 
 	Weather data:
 		by simple https://openweathermap.org/  API service
