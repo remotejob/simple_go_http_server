@@ -1,0 +1,1 @@
+kubectl expose deployment simple-go-http-server --type="NodePort"
