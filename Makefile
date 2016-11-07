@@ -1,7 +1,7 @@
 all: push
 
 # 0.0 shouldn't clobber any released builds
-TAG =0.1
+TAG =0.2
 PREFIX = remotejob/simple_go_http_server
 
 binary: server.go

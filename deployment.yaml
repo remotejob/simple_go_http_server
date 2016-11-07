@@ -10,6 +10,6 @@ spec:
     spec:
       containers:
       - name: simple-go-http-server
-        image:  remotejob/simple_go_http_server:0.0
+        image:  remotejob/simple_go_http_server:0.2
         ports:
         - containerPort: 8080

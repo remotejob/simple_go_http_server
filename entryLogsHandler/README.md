@@ -30,8 +30,8 @@ func (logs *EntryLog) AddLastRecords(file string, deltaTime time.Duration, init 
 ```
 AddLastRecords used mostly for control database (in our case simple .csv file)
 it keep only needed records. 1. It used at spart up (init func) init paramaters
-mustb be set TRUE 2. Used as goroutines periodicly cleapUp Database init
-paramaters mustb be set FALSE
+must be set TRUE 2. Used as goroutines periodicly cleapUp Database init
+paramaters must be set FALSE
 
 #### func (*EntryLog) AddNewHit
 
