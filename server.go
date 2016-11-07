@@ -16,6 +16,7 @@ import (
 
 const logfile = "logs.csv"
 const timeSeconds int = 60
+const cleanUpHitsDelta int = 10
 
 var counterToClenUpLogfile int
 var newLogsEntry *entryLogsHandler.EntryLog
@@ -72,11 +73,11 @@ func loghandler(rw http.ResponseWriter, req *http.Request) {
 
 		} else {
 
-			newLogsEntry.DeleteExtraRecords(i)
+			go newLogsEntry.DeleteExtraRecords(i)
 
 			counterToClenUpLogfile++
 
-			if counterToClenUpLogfile > 10 {
+			if counterToClenUpLogfile > cleanUpHitsDelta {
 				go newLogsEntry.AddLastRecords(logfile, deltaTime, false)
 				counterToClenUpLogfile = 0
 			}

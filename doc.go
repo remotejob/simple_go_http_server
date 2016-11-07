@@ -31,13 +31,15 @@
 		binary ./server compiled for Linux ELF 64-bit LSB  executable, x86-64, version 1 (SYSV), statically linked, not stripped
 		so to use under Windows an Mac it must be recompiled
 
+	database:
+		simple .csv file (logs.csv) it can be something more serious. I thinks Redis will be best in that case.
+
 	deployment on cluster:
 		file deployment.yaml can be useful
 
 	size:
 		Doker image after deployment on Registry:
 		size 3.963 MB!! It's greate!
-
 
 	Docker and Golang:
 		Golang: definitely winning in relation to Docker compare with others languages

@@ -1,3 +1,8 @@
+/*
+used to keep records slice of struc in pointer
+it ad new records ad delete not used records in pointer
+keep clean Database (.csv file but it can be other backend for example redis etc..)
+*/
 package entryLogsHandler
 
 import (
@@ -18,12 +23,10 @@ func NewEntryLog() *EntryLog {
 	return &EntryLog{[]domains.Log{}}
 }
 
-// func checkError(message string, err error) {
-// 	if err != nil {
-// 		log.Fatal(message, err)
-// 	}
-// }
-
+//AddLastRecords used mostly for control database (in our case simple .csv file)
+//it keep only needed records.
+//1. It used at spart up (init func) init paramaters mustb be set TRUE
+//2. Used as goroutines periodicly cleapUp Database init paramaters mustb be set FALSE
 func (logs *EntryLog) AddLastRecords(file string, deltaTime time.Duration, init bool) {
 
 	csvfile, err := os.Open(file)
@@ -89,13 +92,12 @@ func (logs *EntryLog) AddLastRecords(file string, deltaTime time.Duration, init 
 
 	wr := csv.NewWriter(csvfile)
 
-	log.Println("tmpArrStr", len(tmpArrStr))
-
 	wr.WriteAll(tmpArrStr)
 
 }
 
-// AddNewHit add last click hit in pointer
+// AddNewHit add last click hit in pointer it used as goroutines
+// so it help for speed improvement
 func (logs *EntryLog) AddNewHit(logstr string) {
 
 	logrecord := domains.Log{time.Now(), logstr}
@@ -104,6 +106,8 @@ func (logs *EntryLog) AddNewHit(logstr string) {
 
 }
 
+//DeleteExtraRecords so it delete not used records from slice
+//as well used in goroutines
 func (logs *EntryLog) DeleteExtraRecords(index int) {
 
 	var tmparr []domains.Log
@@ -111,11 +115,5 @@ func (logs *EntryLog) DeleteExtraRecords(index int) {
 	tmparr = append(logs.EntryLog[:index], logs.EntryLog[index+1:]...)
 
 	logs.EntryLog = tmparr
-
-}
-
-func (logs *EntryLog) CleanExtraRecords(deltaTimeMin int) {
-
-	// log.Println(len(logs.EntryLog))
 
 }
