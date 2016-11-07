@@ -5,7 +5,7 @@
 /*
 	Package simple_go_http_server
 
-	Live DEMO http://104.155.23.78:8080
+	Live DEMO http://159.203.107.223:30458
 
 
 	Use
@@ -21,20 +21,23 @@
 		Azure Container Service etc..
 		as well can be used as stand alone application
 
-	Weather data:
-		by simple https://openweathermap.org/  API service
+	simple deployment on docker:
+		docker run -t -p 9090:8080 remotejob/simple_go_http_server:0.0
+		test on http://localhost:9090
 
-	Site created by Angular 2 framework:
-		code splited and organized by Webpack
+	stand alone use simple:
+		./server
+		test on http://localhost:8080
+		binary ./server compiled for Linux ELF 64-bit LSB  executable, x86-64, version 1 (SYSV), statically linked, not stripped
+		so to use under Windows an Mac it must be recompiled
 
-	Probably mostly intresting part:
-		all static web files incorporate inside single file ./server
-		how it possible --> https://github.com/rakyll/statik/
+	deployment on cluster:
+		file deployment.yaml can be useful
 
-	Size:
-		Doker image after deployment on Google Container Registry:
-			size without GeoLite2-City.mmdn 3 MB!!
-			total size 35 MB included GeoLite2-City.mmdn.
+	size:
+		Doker image after deployment on Registry:
+		size 3.963 MB!! It's greate!
+
 
 	Docker and Golang:
 		Golang: definitely winning in relation to Docker compare with others languages
@@ -42,6 +45,6 @@
 	Files:
 		Makefile - compile and deploy Docker image
 		Dockerfile - it's Dockerfile for Docker image creation
-		deployment.yaml - kubernetes deployment on Google Container Engine
+		deployment.yaml - kubernetes deployment on any Containers
 */
 package main
