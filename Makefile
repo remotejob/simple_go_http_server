@@ -1,7 +1,7 @@
 all: push
 
 # 0.0 shouldn't clobber any released builds
-TAG =0.2
+TAG =0.3
 PREFIX = remotejob/simple_go_http_server
 
 binary: server.go
@@ -14,7 +14,7 @@ push: container
 	docker push $(PREFIX):$(TAG)
 
 set: 
-	 kubectl set image deployment/simple-go-http-server simple-go-http-server=$(PREFIX):$(TAG)
+	 kubectl  --kubeconfig  ~/admin.conf set image deployment/simple-go-http-server simple-go-http-server=$(PREFIX):$(TAG) -n test
 
 clean:
 	docker rmi -f $(PREFIX):$(TAG) || true

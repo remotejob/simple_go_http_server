@@ -96,8 +96,7 @@ func (logs *EntryLog) AddLastRecords(file string, deltaTime time.Duration, init 
 
 }
 
-// AddNewHit add last click hit in pointer it used as goroutines
-// so it help for speed improvement
+// AddNewHit add last click click hits in pointer
 func (logs *EntryLog) AddNewHit(logstr string) {
 
 	logrecord := domains.Log{time.Now(), logstr}

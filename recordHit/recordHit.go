@@ -10,6 +10,7 @@ import (
 )
 
 //Record  Write last Log record in CVS file
+//it used in goroutine
 func Record(file string, log domains.Log) {
 
 	f, err := os.OpenFile(file, os.O_WRONLY|os.O_APPEND, 0644)

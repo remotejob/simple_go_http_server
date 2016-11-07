@@ -10,4 +10,4 @@
 ```go
 func Record(file string, log domains.Log)
 ```
-Record Write last Log record in CVS file
+Record Write last Log record in CVS file it used in goroutine

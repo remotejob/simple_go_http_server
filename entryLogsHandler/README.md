@@ -38,8 +38,7 @@ paramaters must be set FALSE
 ```go
 func (logs *EntryLog) AddNewHit(logstr string)
 ```
-AddNewHit add last click hit in pointer it used as goroutines so it help for
-speed improvement
+AddNewHit add last click click hits in pointer
 
 #### func (*EntryLog) DeleteExtraRecords
 

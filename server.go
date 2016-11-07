@@ -60,7 +60,7 @@ func middleware(h http.Handler) http.Handler {
 
 func loghandler(rw http.ResponseWriter, req *http.Request) {
 
-	newLogsEntry.AddNewHit(req.UserAgent())
+	go newLogsEntry.AddNewHit(req.UserAgent())
 
 	var htmlLogs [][]string
 
@@ -73,12 +73,12 @@ func loghandler(rw http.ResponseWriter, req *http.Request) {
 
 		} else {
 
-			go newLogsEntry.DeleteExtraRecords(i)
+			newLogsEntry.DeleteExtraRecords(i)
 
 			counterToClenUpLogfile++
 
 			if counterToClenUpLogfile > cleanUpHitsDelta {
-				go newLogsEntry.AddLastRecords(logfile, deltaTime, false)
+				newLogsEntry.AddLastRecords(logfile, deltaTime, false)
 				counterToClenUpLogfile = 0
 			}
 

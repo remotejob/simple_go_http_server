@@ -2,10 +2,9 @@
 --
 Package simple_go_http_server
 
-Live DEMO http://159.203.107.223:30458
+Live DEMO http://159.203.134.218:32175
 
-
-### Use
+Use:
 
 as utility for logs view:
 
@@ -20,10 +19,10 @@ small Docker container image can be demployed on
 
 simple deployment on docker:
 
-    docker run -t -p 9090:8080 remotejob/simple_go_http_server:0.0
+    docker run -t -p 9090:8080 remotejob/simple_go_http_server:0.3
     test on http://localhost:9090
 
-stand alone use simple:
+stand alone use:
 
     ./server
     test on http://localhost:8080
@@ -37,6 +36,7 @@ database:
 deployment on cluster:
 
     file deployment.yaml can be useful
+    file intend use kubernetes for cluster orchestration.
 
 size:
 
@@ -51,4 +51,4 @@ Files:
 
     Makefile - compile and deploy Docker image
     Dockerfile - it's Dockerfile for Docker image creation
-    deployment.yaml - kubernetes deployment on any Containers
+    deployment.yaml - kubernetes deployment on any Cluster Containers
