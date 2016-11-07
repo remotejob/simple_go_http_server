@@ -61,8 +61,6 @@ func loghandler(rw http.ResponseWriter, req *http.Request) {
 
 	newLogsEntry.AddNewHit(req.UserAgent())
 
-	log.Println("Click ", len(newLogsEntry.EntryLog))
-
 	var htmlLogs [][]string
 
 	for i, logentry := range newLogsEntry.EntryLog {

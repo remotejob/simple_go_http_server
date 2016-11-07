@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: simple-go-http-server
+spec:
+  template:
+    metadata:
+      labels:
+        run: simple-go-http-server
+    spec:
+      containers:
+      - name: simple-go-http-server
+        image:  remotejob/simple_go_http_server:0.0
+        ports:
+        - containerPort: 8080

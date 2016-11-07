@@ -7,8 +7,6 @@
 
 	Live DEMO http://104.155.23.78:8080
 
-	Angular2 code https://github.com/remotejob/weathermap_ang2_webpack.
-
 
 	Use
 
