@@ -1,15 +1,9 @@
-// Copyright 2016 The Mazurov Alex. All rights reserved.
+// Copyright 2009 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 /*
-	Package simple_go_http_server simple log viewer
-
-    Task:
-
-	Create a Go HTTP server that on each request responds with a counter of the total number of requests that it has received during the last 60 seconds.
-	The server should continue to the return the correct numbers after restarting it, by persisting data to a file.
-
+	Package weathermap_go simple web site
 
 	Live DEMO http://104.155.23.78:8080
 

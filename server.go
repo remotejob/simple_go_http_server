@@ -15,7 +15,7 @@ import (
 )
 
 const logfile = "logs.csv"
-const timeMin int = 30
+const timeSeconds int = 60
 
 var counterToClenUpLogfile int
 var newLogsEntry *entryLogsHandler.EntryLog
@@ -24,7 +24,7 @@ var deltaTime time.Duration
 
 func init() {
 
-	deltaTime = time.Duration(time.Minute * time.Duration(timeMin))
+	deltaTime = time.Duration(time.Second * time.Duration(timeSeconds))
 
 	newLogsEntry = entryLogsHandler.NewEntryLog()
 
@@ -63,12 +63,14 @@ func loghandler(rw http.ResponseWriter, req *http.Request) {
 
 	log.Println("Click ", len(newLogsEntry.EntryLog))
 
+	var htmlLogs [][]string
+
 	for i, logentry := range newLogsEntry.EntryLog {
 
 		delta := time.Since(logentry.Date)
 
 		if deltaTime.Seconds() > delta.Seconds() {
-			fmt.Fprintln(rw, logentry.Date.Format(time.RFC3339), logentry.Log)
+			htmlLogs = append(htmlLogs, []string{logentry.Date.Format(time.RFC3339), logentry.Log})
 
 		} else {
 
@@ -76,15 +78,20 @@ func loghandler(rw http.ResponseWriter, req *http.Request) {
 
 			counterToClenUpLogfile++
 
-			log.Println("counterToClenUpLogfile", counterToClenUpLogfile)
-
 			if counterToClenUpLogfile > 10 {
-				// newLogsEntry.CleanExtraRecords(deltaTime)
 				go newLogsEntry.AddLastRecords(logfile, deltaTime, false)
 				counterToClenUpLogfile = 0
 			}
 
 		}
+
+	}
+
+	//Show All information
+	fmt.Fprintln(rw, "Count", len(htmlLogs), "hits last 60 seconds")
+	fmt.Fprintln(rw, "-------------------------------------------------")
+	for i, htmlLog := range htmlLogs {
+		fmt.Fprintln(rw, i, htmlLog)
 
 	}
 
